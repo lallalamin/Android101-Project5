@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <ImageView
-        android:id="@+id/spaceimageView"
+        android:id="@+id/spaceImageView"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -50,7 +50,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spaceimageView"
+        app:layout_constraintTop_toBottomOf="@+id/spaceImageView"
         tools:text="Description" />
 
     <TextView

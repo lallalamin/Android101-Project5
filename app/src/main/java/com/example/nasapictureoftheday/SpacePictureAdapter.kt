@@ -9,8 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nasapictureoftheday.R
+import com.example.nasapictureoftheday.SpacePicture
 
-class SpacePictureAdapter(private val spaceList: List<String>) : RecyclerView.Adapter<SpacePictureAdapter.ViewHolder>(){
+class SpacePictureAdapter(private val spaceList: List<SpacePicture>) : RecyclerView.Adapter<SpacePictureAdapter.ViewHolder>(){
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val spaceImage: ImageView
         val explanation: TextView
@@ -19,7 +20,7 @@ class SpacePictureAdapter(private val spaceList: List<String>) : RecyclerView.Ad
 
         init {
             // Find our RecyclerView item's ImageView for future use
-            spaceImage = view.findViewById(R.id.spaceimageView)
+            spaceImage = view.findViewById(R.id.spaceImageView)
             explanation = view.findViewById(R.id.description)
             name = view.findViewById(R.id.Name)
             date = view.findViewById(R.id.date)
@@ -44,9 +45,10 @@ class SpacePictureAdapter(private val spaceList: List<String>) : RecyclerView.Ad
             .centerCrop()
             .into(holder.spaceImage)
 
-        //holder.explanation.text = spacePicture.description
-        //holder.name.text = spacePicture.Name
-        //holder.date.text = spacePicture.date
+        holder.explanation.text = spacePicture.explanation
+        holder.name.text = spacePicture.name
+        holder.date.text = spacePicture.date
+
     }
 
 }

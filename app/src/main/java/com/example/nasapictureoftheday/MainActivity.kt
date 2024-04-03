@@ -24,8 +24,8 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rvSpace: RecyclerView
-    private lateinit var spaceList : MutableList<String>
-    private lateinit var adapter: SpacePictureAdapter
+    private lateinit var spaceList : MutableList<SpacePicture>
+    //private lateinit var adapter: SpacePictureAdapter
     var spaceImageURL = ""
     var spaceExplaination = ""
     var spaceName = ""
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                     spaceName = json.jsonObject.optString("title")
                     spaceDate = json.jsonObject.optString("date")
 
-                    val spacePicture = SpacePicture(spaceImageURL, spaceExplaination, spaceName, spaceDate).toString()
+                    val spacePicture = SpacePicture(spaceImageURL, spaceExplaination, spaceName, spaceDate)
                     spaceList.add(spacePicture)
 
                     val adapter = SpacePictureAdapter(spaceList)
