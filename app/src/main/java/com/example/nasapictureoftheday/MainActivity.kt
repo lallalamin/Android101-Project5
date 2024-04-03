@@ -6,7 +6,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.DividerItemDecoration
+//import com.bumptech.glide.Glide
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import okhttp3.Headers
@@ -14,7 +15,98 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.driuft.random_pets_starter.SpacePictureAdapter
+import org.json.JSONException
+import org.json.JSONObject
 
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var rvSpace: RecyclerView
+    private lateinit var spaceList : MutableList<String>
+    private lateinit var adapter: SpacePictureAdapter
+    var spaceImageURL = ""
+    var spaceExplaination = ""
+    var spaceName = ""
+    var spaceDate = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        spaceList = mutableListOf()
+        rvSpace = findViewById(R.id.space_list)
+
+        //recyclerView = findViewById(R.id.recyclerView)
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+        //adapter = SpacePictureAdapter(ArrayList())
+        //recyclerView.adapter = adapter
+
+        fetchSpacePictures()
+    }
+
+    private fun fetchSpacePictures() {
+        val client = AsyncHttpClient()
+
+        for (i in 1..20){
+            var date = randomDate()
+            var apiURL = "https://api.nasa.gov/planetary/apod?api_key=l1L6h8QWydxdinmqdt6e9drMxofYrkrQ8iYcKHhH&date=$date"
+
+            client[apiURL, object : JsonHttpResponseHandler() {
+                override fun onSuccess(statusCode: Int, headers: Headers, json: JsonHttpResponseHandler.JSON) {
+                    Log.d("space", "response successful$json")
+
+                    spaceImageURL = json.jsonObject.optString("hdurl")
+                    spaceExplaination = json.jsonObject.optString("explanation")
+                    spaceName = json.jsonObject.optString("title")
+                    spaceDate = json.jsonObject.optString("date")
+
+                    val spacePicture = SpacePicture(spaceImageURL, spaceExplaination, spaceName, spaceDate).toString()
+                    spaceList.add(spacePicture)
+
+                    val adapter = SpacePictureAdapter(spaceList)
+                    rvSpace.adapter = adapter
+                    rvSpace.layoutManager = LinearLayoutManager(this@MainActivity)
+                    rvSpace.addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
+
+                }
+
+                override fun onFailure(
+                    statusCode: Int,
+                    headers: Headers?,
+                    errorResponse: String,
+                    throwable: Throwable?
+                ) {
+                    Log.d("Space Error", errorResponse)
+                }
+            }]
+
+        }
+
+    }
+
+    private fun randomDate(): String{
+        var calendar= Calendar.getInstance()
+        calendar.set(1995, Calendar.JUNE, 16)
+
+        var currentDate = Calendar.getInstance()
+
+        var minMillis = calendar.timeInMillis
+        var maxMillis = currentDate.timeInMillis
+        var differenceMillis = maxMillis - minMillis
+
+        val randomMillis = (Math.random() * differenceMillis).toLong()
+
+        calendar.timeInMillis = minMillis + randomMillis
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return sdf.format(calendar.time)
+    }
+}
+
+
+/*
 class MainActivity : AppCompatActivity() {
 
     var spaceImageURL = ""
@@ -105,3 +197,4 @@ class MainActivity : AppCompatActivity() {
         return sdf.format(Date())
     }
 }
+*/
