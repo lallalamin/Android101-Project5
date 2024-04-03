@@ -41,7 +41,7 @@ class SpacePictureAdapter(private val spaceList: List<SpacePicture>) : RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val spacePicture = spaceList[position]
         Glide.with(holder.itemView)
-            .load(spaceList[position])
+            .load(spacePicture.imageUrl)
             .centerCrop()
             .into(holder.spaceImage)
 
