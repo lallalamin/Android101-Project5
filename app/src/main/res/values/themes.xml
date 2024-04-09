@@ -3,6 +3,31 @@
     <style name="Base.Theme.NASAPictureOfTheDay" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/darkBlue</item>
+        <item name="colorPrimaryVariant">@color/teal</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorOnSecondary">@color/sand</item>
+
+        <item name="android:statusBarColor">@color/darkBlue</item>
+        <item name="android:background">@color/teal</item>
+
+    </style>
+
+    <style name="TextView.Description" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:background">?attr/colorOnSecondary</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="TextView.Name" parent="Widget.AppCompat.TextView">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextView.Date" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@drawable/rounded</item>
     </style>
 
     <style name="Theme.NASAPictureOfTheDay" parent="Base.Theme.NASAPictureOfTheDay" />

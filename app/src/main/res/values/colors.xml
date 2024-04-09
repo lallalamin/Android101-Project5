@@ -6,4 +6,10 @@
     <color name="lightBlue">#6f9ec9</color>
     <color name="yellow">#f5eb9f</color>
     <color name="lightGray">#a3a3a3</color>
+
+    <color name="orange">#F6733A</color>
+    <color name="green">#387654</color>
+    <color name="sand">#ECD6C3</color>
+    <color name="darkBlue">#1D313C</color>
+    <color name="teal">#4FA3AB</color>
 </resources>
